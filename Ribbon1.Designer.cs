@@ -33,11 +33,14 @@
             this.btn_InsertEquation = this.Factory.CreateRibbonButton();
             this.CodeGroup = this.Factory.CreateRibbonGroup();
             this.btn_InsertCodeBox = this.Factory.CreateRibbonButton();
+            this.insertSeqGroup = this.Factory.CreateRibbonGroup();
+            this.InsertFieldCode = this.Factory.CreateRibbonButton();
             this.IntroduceGroup = this.Factory.CreateRibbonGroup();
             this.btn_AboutThisAddIn = this.Factory.CreateRibbonButton();
             this.MainTab.SuspendLayout();
             this.EquationGroup.SuspendLayout();
             this.CodeGroup.SuspendLayout();
+            this.insertSeqGroup.SuspendLayout();
             this.IntroduceGroup.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,6 +49,7 @@
             this.MainTab.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
             this.MainTab.Groups.Add(this.EquationGroup);
             this.MainTab.Groups.Add(this.CodeGroup);
+            this.MainTab.Groups.Add(this.insertSeqGroup);
             this.MainTab.Groups.Add(this.IntroduceGroup);
             this.MainTab.Label = "公式与代码";
             this.MainTab.Name = "MainTab";
@@ -80,6 +84,21 @@
             this.btn_InsertCodeBox.ShowImage = true;
             this.btn_InsertCodeBox.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_InsertCodeBox_Click);
             // 
+            // insertSeqGroup
+            // 
+            this.insertSeqGroup.Items.Add(this.InsertFieldCode);
+            this.insertSeqGroup.Label = "常用域代码组合";
+            this.insertSeqGroup.Name = "insertSeqGroup";
+            // 
+            // InsertFieldCode
+            // 
+            this.InsertFieldCode.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.InsertFieldCode.Image = global::Equation_and_Codebox.Properties.Resources.Field_icon;
+            this.InsertFieldCode.Label = "插入 SEQ 域组合";
+            this.InsertFieldCode.Name = "InsertFieldCode";
+            this.InsertFieldCode.ShowImage = true;
+            this.InsertFieldCode.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.InsertFieldCode_Click);
+            // 
             // IntroduceGroup
             // 
             this.IntroduceGroup.Items.Add(this.btn_AboutThisAddIn);
@@ -89,6 +108,7 @@
             // btn_AboutThisAddIn
             // 
             this.btn_AboutThisAddIn.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.btn_AboutThisAddIn.Image = global::Equation_and_Codebox.Properties.Resources.About_icon;
             this.btn_AboutThisAddIn.Label = "关于插件";
             this.btn_AboutThisAddIn.Name = "btn_AboutThisAddIn";
             this.btn_AboutThisAddIn.ShowImage = true;
@@ -106,6 +126,8 @@
             this.EquationGroup.PerformLayout();
             this.CodeGroup.ResumeLayout(false);
             this.CodeGroup.PerformLayout();
+            this.insertSeqGroup.ResumeLayout(false);
+            this.insertSeqGroup.PerformLayout();
             this.IntroduceGroup.ResumeLayout(false);
             this.IntroduceGroup.PerformLayout();
             this.ResumeLayout(false);
@@ -121,6 +143,8 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_InsertCodeBox;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup IntroduceGroup;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_AboutThisAddIn;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup insertSeqGroup;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton InsertFieldCode;
     }
 
     partial class ThisRibbonCollection {

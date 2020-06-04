@@ -63,6 +63,16 @@ namespace Equation_and_Codebox.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap About_icon {
+            get {
+                object obj = ResourceManager.GetObject("About_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CodeTable_icon {
             get {
                 object obj = ResourceManager.GetObject("CodeTable_icon", resourceCulture);
@@ -76,6 +86,16 @@ namespace Equation_and_Codebox.Properties {
         internal static System.Drawing.Bitmap equation_icon {
             get {
                 object obj = ResourceManager.GetObject("equation_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Field_icon {
+            get {
+                object obj = ResourceManager.GetObject("Field_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -59,6 +59,8 @@ namespace Equation_and_Codebox {
             rng.ParagraphFormat.LineUnitAfter = 0;
             rng.ParagraphFormat.SpaceBefore = 0;
             rng.ParagraphFormat.SpaceAfter = 0;
+            rng.ParagraphFormat.LineSpacingRule = Word.WdLineSpacing.wdLineSpaceAtLeast;
+            rng.ParagraphFormat.LineSpacing = 12;
 
             // 设置字体
             equationTable.Cell(1, 1).Range.Font.NameAscii = "LM Mono 10";
@@ -158,6 +160,33 @@ namespace Equation_and_Codebox {
                 app.Selection.TypeText(i.ToString() + "\n");
             }
             app.Selection.TypeText(stringNumberOfLines);
+
+            // 将剪贴板中的 HTML 代码贴入
+            app.Selection.MoveRight(Word.WdUnits.wdCell, 1);
+            app.Selection.Range.Paste();
+
+            // 调整代码单元格的内容
+            codeTable.Cell(1, 2).Range.Font.NameAscii = "LM Mono 10";
+            codeTable.Cell(1, 2).Range.Font.NameFarEast = "宋体";
+            codeTable.Cell(1, 2).Range.Font.Size = 9;
+            codeTable.Cell(1, 2).Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;
+            codeTable.Cell(1, 2).Range.ParagraphFormat.AddSpaceBetweenFarEastAndAlpha = 0;
+            codeTable.Cell(1, 2).Range.ParagraphFormat.AddSpaceBetweenFarEastAndDigit = 0;
+            codeTable.Cell(1, 2).Range.ParagraphFormat.CharacterUnitFirstLineIndent = 0;
+            codeTable.Cell(1, 2).Range.ParagraphFormat.CharacterUnitLeftIndent = 0;
+            codeTable.Cell(1, 2).Range.ParagraphFormat.CharacterUnitRightIndent = 0;
+            codeTable.Cell(1, 2).Range.ParagraphFormat.FirstLineIndent = app.CentimetersToPoints(0);
+            codeTable.Range.ParagraphFormat.LineUnitBefore = 0;
+            codeTable.Range.ParagraphFormat.LineUnitAfter = 0;
+            codeTable.Range.ParagraphFormat.SpaceBefore = 0;
+            codeTable.Range.ParagraphFormat.SpaceAfter = 0;
+            codeTable.Range.ParagraphFormat.LineSpacingRule = Word.WdLineSpacing.wdLineSpaceExactly;
+            codeTable.Range.ParagraphFormat.LineSpacing = 12;
+            codeTable.Range.Font.Bold = 0;
+
+            // 删掉代码块的最后一个空行
+            app.Selection.EndOf(WdUnits.wdCell);
+            app.Selection.TypeBackspace();
         }
 
 
@@ -170,7 +199,40 @@ namespace Equation_and_Codebox {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btn_AboutThisAddIn_Click(object sender, RibbonControlEventArgs e) {
-            MessageBox.Show("Copyright @刘鹏, 2020,\nEmail: littleNewton6@gmail.com");
+            MessageBox.Show("Copyright @刘鹏, 2020,\nContact: littleNewton6@gmail.com");
+        }
+
+
+
+
+
+        /// <summary>
+        /// 插入公式编排所需的域代码
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void InsertFieldCode_Click(object sender, RibbonControlEventArgs e) {
+            // 创建一个 Word Doc 变量
+            Word.Application app = Globals.ThisAddIn.Application;
+            Word.Document doc = app.ActiveDocument;
+
+            // 插入域代码
+            {
+                // { SEQ chapter \h }
+                Field chapterNumber = app.Selection.Range.Fields.Add(
+                    app.Selection.Range,
+                    Word.WdFieldType.wdFieldSequence,
+                    @"chapter \h",
+                    false
+                );
+                // { SEQ equation \r \h }
+                Field equationNumber = app.Selection.Range.Fields.Add(
+                    app.Selection.Range,
+                    Word.WdFieldType.wdFieldSequence,
+                    @"equation \r \h",
+                    false
+                );
+            }
         }
     }
 }
