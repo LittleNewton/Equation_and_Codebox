@@ -27,6 +27,7 @@ namespace Equation_and_Codebox {
 
             // 在光标处插入一个名为 equationTable 的表格
             Word.Table equationTable = app.Selection.Tables.Add(app.Selection.Range, 1, 3);
+            Range rng = equationTable.Range;
 
             // 设置 equationTable 每个单元格的具体宽度
             equationTable.Cell(1, 1).SetWidth(
@@ -49,27 +50,53 @@ namespace Equation_and_Codebox {
             // 居中、居右
             equationTable.Cell(1, 1).VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
             equationTable.Cell(1, 2).VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
-            equationTable.Cell(1, 3).VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalRight;
+            equationTable.Cell(1, 3).VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+            equationTable.Cell(1, 2).Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+            equationTable.Cell(1, 3).Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight;
 
             // 设置段前、后的距离
-            equationTable.Range.ParagraphFormat.LineUnitBefore = 0;
-            equationTable.Range.ParagraphFormat.LineUnitAfter = 0;
-            equationTable.Range.ParagraphFormat.SpaceBefore = 0;
-            equationTable.Range.ParagraphFormat.SpaceAfter = 0;
+            rng.ParagraphFormat.LineUnitBefore = 0;
+            rng.ParagraphFormat.LineUnitAfter = 0;
+            rng.ParagraphFormat.SpaceBefore = 0;
+            rng.ParagraphFormat.SpaceAfter = 0;
 
-        }
+            // 设置字体
+            equationTable.Cell(1, 1).Range.Font.NameAscii = "LM Mono 10";
+            equationTable.Cell(1, 2).Range.Font.NameAscii = "Latin Modern Math";
+            equationTable.Cell(1, 3).Range.Font.NameAscii = "LM Mono 10";
 
+            // 插入公式
+            app.Selection.MoveRight(Word.WdUnits.wdCell, 1);
+            app.Selection.OMaths.Add(app.Selection.Range);
 
+            // 插入域代码
+            app.Selection.MoveRight(Word.WdUnits.wdCell, 1);
+            {
+                // Type '('
+                app.Selection.TypeText("(");
 
+                // { SEQ Chapter \c } 
+                Field chapterNumber = app.Selection.Range.Fields.Add(
+                    app.Selection.Range,
+                    Word.WdFieldType.wdFieldSequence,
+                    @"chapter \c",
+                    false
+                );
 
+                // Type '-'
+                app.Selection.TypeText("-");
 
-        /// <summary>
-        /// 显示版权信息
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btn_AboutThisAddIn_Click(object sender, RibbonControlEventArgs e) {
-            MessageBox.Show("Copyright @刘鹏, 2020,\nEmail: littleNewton6@gmail.com");
+                // { SEQ Equation }
+                Field equationNumber = app.Selection.Range.Fields.Add(
+                    app.Selection.Range,
+                    Word.WdFieldType.wdFieldSequence, 
+                    @"equation",
+                    false
+                );
+
+                // Type ')'
+                app.Selection.TypeText(")");
+            }
         }
 
 
@@ -131,6 +158,19 @@ namespace Equation_and_Codebox {
                 app.Selection.TypeText(i.ToString() + "\n");
             }
             app.Selection.TypeText(stringNumberOfLines);
+        }
+
+
+
+
+
+        /// <summary>
+        /// 显示版权信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_AboutThisAddIn_Click(object sender, RibbonControlEventArgs e) {
+            MessageBox.Show("Copyright @刘鹏, 2020,\nEmail: littleNewton6@gmail.com");
         }
     }
 }

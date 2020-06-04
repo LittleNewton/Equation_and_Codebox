@@ -30,11 +30,11 @@
         private void InitializeComponent() {
             this.MainTab = this.Factory.CreateRibbonTab();
             this.EquationGroup = this.Factory.CreateRibbonGroup();
+            this.btn_InsertEquation = this.Factory.CreateRibbonButton();
             this.CodeGroup = this.Factory.CreateRibbonGroup();
+            this.btn_InsertCodeBox = this.Factory.CreateRibbonButton();
             this.IntroduceGroup = this.Factory.CreateRibbonGroup();
             this.btn_AboutThisAddIn = this.Factory.CreateRibbonButton();
-            this.btn_InsertEquation = this.Factory.CreateRibbonButton();
-            this.btn_InsertCodeBox = this.Factory.CreateRibbonButton();
             this.MainTab.SuspendLayout();
             this.EquationGroup.SuspendLayout();
             this.CodeGroup.SuspendLayout();
@@ -56,11 +56,29 @@
             this.EquationGroup.Label = "公式";
             this.EquationGroup.Name = "EquationGroup";
             // 
+            // btn_InsertEquation
+            // 
+            this.btn_InsertEquation.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.btn_InsertEquation.Image = global::Equation_and_Codebox.Properties.Resources.equation_icon;
+            this.btn_InsertEquation.Label = "插入带编号的公式";
+            this.btn_InsertEquation.Name = "btn_InsertEquation";
+            this.btn_InsertEquation.ShowImage = true;
+            this.btn_InsertEquation.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_InsertEquation_Click);
+            // 
             // CodeGroup
             // 
             this.CodeGroup.Items.Add(this.btn_InsertCodeBox);
             this.CodeGroup.Label = "代码";
             this.CodeGroup.Name = "CodeGroup";
+            // 
+            // btn_InsertCodeBox
+            // 
+            this.btn_InsertCodeBox.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.btn_InsertCodeBox.Image = global::Equation_and_Codebox.Properties.Resources.CodeTable_icon;
+            this.btn_InsertCodeBox.Label = "从剪贴板插入代码";
+            this.btn_InsertCodeBox.Name = "btn_InsertCodeBox";
+            this.btn_InsertCodeBox.ShowImage = true;
+            this.btn_InsertCodeBox.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_InsertCodeBox_Click);
             // 
             // IntroduceGroup
             // 
@@ -75,24 +93,6 @@
             this.btn_AboutThisAddIn.Name = "btn_AboutThisAddIn";
             this.btn_AboutThisAddIn.ShowImage = true;
             this.btn_AboutThisAddIn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AboutThisAddIn_Click);
-            // 
-            // btn_InsertEquation
-            // 
-            this.btn_InsertEquation.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.btn_InsertEquation.Image = global::Equation_and_Codebox.Properties.Resources.equation_icon;
-            this.btn_InsertEquation.Label = "插入带编号的公式";
-            this.btn_InsertEquation.Name = "btn_InsertEquation";
-            this.btn_InsertEquation.ShowImage = true;
-            this.btn_InsertEquation.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_InsertEquation_Click);
-            // 
-            // btn_InsertCodeBox
-            // 
-            this.btn_InsertCodeBox.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.btn_InsertCodeBox.Image = global::Equation_and_Codebox.Properties.Resources.CodeTable_icon;
-            this.btn_InsertCodeBox.Label = "从剪贴板插入代码";
-            this.btn_InsertCodeBox.Name = "btn_InsertCodeBox";
-            this.btn_InsertCodeBox.ShowImage = true;
-            this.btn_InsertCodeBox.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_InsertCodeBox_Click);
             // 
             // Ribbon1
             // 
