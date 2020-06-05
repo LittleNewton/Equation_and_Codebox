@@ -156,10 +156,14 @@ namespace Equation_and_Codebox {
             // 输入连续的行号
             string stringNumberOfLines = Microsoft.VisualBasic.Interaction.InputBox("请输入代码终止行数", "输入行数", "50");
             int NumberOfLines = Int32.Parse(stringNumberOfLines);
-            for (int i = 1; i <= NumberOfLines - 1; i++) {
-                app.Selection.TypeText(i.ToString() + "\n");
+            {
+                string totalLines = "";
+                for (int i = 1; i <= NumberOfLines - 1; i++) {
+                    totalLines = totalLines + i.ToString() + "\n";
+                }
+                totalLines = totalLines + stringNumberOfLines;
+                app.Selection.TypeText(totalLines);
             }
-            app.Selection.TypeText(stringNumberOfLines);
 
             // 将剪贴板中的 HTML 代码贴入
             app.Selection.MoveRight(Word.WdUnits.wdCell, 1);
@@ -183,6 +187,7 @@ namespace Equation_and_Codebox {
             codeTable.Range.ParagraphFormat.LineSpacingRule = Word.WdLineSpacing.wdLineSpaceExactly;
             codeTable.Range.ParagraphFormat.LineSpacing = 12;
             codeTable.Range.Font.Bold = 0;
+            codeTable.Range.ParagraphFormat.WordWrap = 0;
 
             // 删掉代码块的最后一个空行
             app.Selection.EndOf(WdUnits.wdCell);
@@ -199,6 +204,7 @@ namespace Equation_and_Codebox {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btn_AboutThisAddIn_Click(object sender, RibbonControlEventArgs e) {
+
             MessageBox.Show("Copyright @刘鹏, 2020,\nContact: littleNewton6@gmail.com");
         }
 
