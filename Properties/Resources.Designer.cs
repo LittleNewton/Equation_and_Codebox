@@ -63,9 +63,9 @@ namespace Equation_and_Codebox.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap About_icon {
+        internal static System.Drawing.Bitmap About {
             get {
-                object obj = ResourceManager.GetObject("About_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("About", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace Equation_and_Codebox.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap CodeTable_icon {
+        internal static System.Drawing.Bitmap ASCII {
             get {
-                object obj = ResourceManager.GetObject("CodeTable_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("ASCII", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace Equation_and_Codebox.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap equation_icon {
+        internal static System.Drawing.Bitmap delta {
             get {
-                object obj = ResourceManager.GetObject("equation_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("delta", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,39 @@ namespace Equation_and_Codebox.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Field_icon {
+        internal static System.Drawing.Bitmap FarEast {
             get {
-                object obj = ResourceManager.GetObject("Field_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("FarEast", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap InsertCode {
+            get {
+                object obj = ResourceManager.GetObject("InsertCode", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap InsertEquation {
+            get {
+                object obj = ResourceManager.GetObject("InsertEquation", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap InsertFieldCode {
+            get {
+                object obj = ResourceManager.GetObject("InsertFieldCode", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

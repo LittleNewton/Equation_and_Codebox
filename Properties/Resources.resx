@@ -118,16 +118,25 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="CodeTable_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\CodeTable_icon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="delta" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\delta.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="equation_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\equation_icon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="InsertFieldCode" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\矢量图版本\InsertFieldCode.wmf;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="About_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\About_icon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ASCII" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\ASCII.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Field_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\Field_icon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="InsertEquation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\矢量图版本\InsertEquation.wmf;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FarEast" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\FarEast.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="InsertCode" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\矢量图版本\InsertCode.wmf;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="About" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\矢量图版本\About.wmf;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

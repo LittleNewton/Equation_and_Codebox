@@ -15,6 +15,43 @@ namespace Equation_and_Codebox {
 
         }
 
+
+
+
+
+        /// <summary>
+        /// 插入公式编排所需的域代码
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void InsertFieldCode_Click(object sender, RibbonControlEventArgs e) {
+            // 创建一个 Word Doc 变量
+            Word.Application app = Globals.ThisAddIn.Application;
+            Word.Document doc = app.ActiveDocument;
+
+            // 插入域代码
+            {
+                // { SEQ chapter \h }
+                Field chapterNumber = app.Selection.Range.Fields.Add(
+                    app.Selection.Range,
+                    Word.WdFieldType.wdFieldSequence,
+                    @"chapter \h",
+                    false
+                );
+                // { SEQ equation \r \h }
+                Field equationNumber = app.Selection.Range.Fields.Add(
+                    app.Selection.Range,
+                    Word.WdFieldType.wdFieldSequence,
+                    @"equation \r \h",
+                    false
+                );
+            }
+        }
+
+
+
+
+
         /// <summary>
         /// 插入带有编号的公式
         /// </summary>
@@ -141,8 +178,8 @@ namespace Equation_and_Codebox {
             codeTable.Range.ParagraphFormat.LineSpacing = 12;
 
             // 设置字体
-            codeTable.Range.Font.NameAscii = "LM Mono 10";
-            codeTable.Range.Font.NameFarEast = "宋体";
+            codeTable.Range.Font.NameAscii = dropDown_CodeFont_ASCII.SelectedItem.ToString();
+            codeTable.Range.Font.NameFarEast = dropDown_CodeFont_FarEast.SelectedItem.ToString();
             codeTable.Range.Font.Size = 9;
 
             // 设置单元格对齐方式
@@ -153,15 +190,43 @@ namespace Equation_and_Codebox {
             codeTable.Cell(1, 2).Range.ParagraphFormat.AddSpaceBetweenFarEastAndAlpha = 0;
             codeTable.Cell(1, 2).Range.ParagraphFormat.AddSpaceBetweenFarEastAndDigit = 0;
 
-            // 输入连续的行号
-            string stringNumberOfLines = Microsoft.VisualBasic.Interaction.InputBox("请输入代码终止行数", "输入行数", "50");
-            int NumberOfLines = Int32.Parse(stringNumberOfLines);
+            // 计算行号
+            string tmp_clipboard = Clipboard.GetText();
+            int numberOfLines = tmp_clipboard.Split('\n').Length - 1;
+
+            // 打印连续的行号，最大步长 maxStep 从下拉菜单中选择，默认为 1
+            int maxStep = Int32.Parse(dropDown_lineStep.SelectedItem.ToString());
+            int numOfPrint = numberOfLines / maxStep;
             {
                 string totalLines = "";
-                for (int i = 1; i <= NumberOfLines - 1; i++) {
-                    totalLines = totalLines + i.ToString() + "\n";
+                if (maxStep == 1) {
+                    for (int i = 1; i <= numberOfLines - 1; i++) {
+                        totalLines = totalLines + i.ToString() + "\n";
+                    }
+                    totalLines = totalLines + numberOfLines.ToString();
                 }
-                totalLines = totalLines + stringNumberOfLines;
+                else {
+                    // 先存储 1 和 maxStep - 1 个换行符
+                    totalLines = totalLines + 1.ToString();
+                    for (int i = 1; i <= (maxStep - 1); i++) {
+                        totalLines = totalLines + "\n";
+                    }
+
+                    // 打印 maxStep 开始的整数组字符
+                    for (int i = 1; i <= numOfPrint - 1; i++) {
+                        totalLines = totalLines + (i * maxStep).ToString();
+                        for (int j = 1; j <= maxStep; j++) {
+                            totalLines = totalLines + "\n";
+                        }
+                    }
+                    totalLines = totalLines + (numOfPrint * maxStep).ToString();
+
+                    // 打印最后的零散空格
+                    int numOfRemainder = numberOfLines % maxStep;
+                    for (int i = 1; i <= (numOfRemainder); i++) {
+                        totalLines = totalLines + "\n";
+                    }
+                }
                 app.Selection.TypeText(totalLines);
             }
 
@@ -170,8 +235,8 @@ namespace Equation_and_Codebox {
             app.Selection.Range.Paste();
 
             // 调整代码单元格的内容
-            codeTable.Cell(1, 2).Range.Font.NameAscii = "LM Mono 10";
-            codeTable.Cell(1, 2).Range.Font.NameFarEast = "宋体";
+            codeTable.Cell(1, 2).Range.Font.NameAscii = dropDown_CodeFont_ASCII.SelectedItem.ToString();
+            codeTable.Cell(1, 2).Range.Font.NameFarEast = dropDown_CodeFont_FarEast.SelectedItem.ToString();
             codeTable.Cell(1, 2).Range.Font.Size = 9;
             codeTable.Cell(1, 2).Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;
             codeTable.Cell(1, 2).Range.ParagraphFormat.AddSpaceBetweenFarEastAndAlpha = 0;
@@ -190,8 +255,8 @@ namespace Equation_and_Codebox {
             codeTable.Range.ParagraphFormat.WordWrap = 0;
 
             // 删掉代码块的最后一个空行
-            app.Selection.EndOf(WdUnits.wdCell);
-            app.Selection.TypeBackspace();
+            // app.Selection.EndOf(WdUnits.wdCell);
+            // app.Selection.TypeBackspace();
         }
 
 
@@ -206,39 +271,6 @@ namespace Equation_and_Codebox {
         private void btn_AboutThisAddIn_Click(object sender, RibbonControlEventArgs e) {
 
             MessageBox.Show("Copyright @刘鹏, 2020,\nContact: littleNewton6@gmail.com");
-        }
-
-
-
-
-
-        /// <summary>
-        /// 插入公式编排所需的域代码
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void InsertFieldCode_Click(object sender, RibbonControlEventArgs e) {
-            // 创建一个 Word Doc 变量
-            Word.Application app = Globals.ThisAddIn.Application;
-            Word.Document doc = app.ActiveDocument;
-
-            // 插入域代码
-            {
-                // { SEQ chapter \h }
-                Field chapterNumber = app.Selection.Range.Fields.Add(
-                    app.Selection.Range,
-                    Word.WdFieldType.wdFieldSequence,
-                    @"chapter \h",
-                    false
-                );
-                // { SEQ equation \r \h }
-                Field equationNumber = app.Selection.Range.Fields.Add(
-                    app.Selection.Range,
-                    Word.WdFieldType.wdFieldSequence,
-                    @"equation \r \h",
-                    false
-                );
-            }
         }
     }
 }
