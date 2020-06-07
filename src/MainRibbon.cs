@@ -192,16 +192,31 @@ namespace Equation_and_Codebox {
 
             // 计算行号
             string tmp_clipboard = Clipboard.GetText();
-            int numberOfLines = tmp_clipboard.Split('\n').Length - 1;
+            string[] AllLines = tmp_clipboard.Split('\n');
+            int numberOfLines = AllLines.Length - 1;
 
             // 打印连续的行号，最大步长 maxStep 从下拉菜单中选择，默认为 1
             int maxStep = Int32.Parse(dropDown_lineStep.SelectedItem.ToString());
+            int maxCharsOfEachLine = 96; // LM Mono 10, 9pt, 16.5cm
             int numOfPrint = numberOfLines / maxStep;
             {
                 string totalLines = "";
                 if (maxStep == 1) {
+                    int numOfLineBreaks = 0;
                     for (int i = 1; i <= numberOfLines - 1; i++) {
-                        totalLines = totalLines + i.ToString() + "\n";
+                        int remainder = AllLines[i - 1].Length % maxCharsOfEachLine;
+                        int isRemainderExist = 0;
+                        if (remainder == 0) {
+                            isRemainderExist = 0;
+                        }
+                        else {
+                            isRemainderExist = 1;
+                        }
+                        numOfLineBreaks = AllLines[i - 1].Length / maxCharsOfEachLine + isRemainderExist;
+                        totalLines = totalLines + i.ToString();
+                        for (int j = 0; j < numOfLineBreaks; j++) {
+                            totalLines = totalLines + "\n";
+                        }
                     }
                     totalLines = totalLines + numberOfLines.ToString();
                 }
