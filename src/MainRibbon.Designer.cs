@@ -49,6 +49,7 @@ namespace Equation_and_Codebox {
             this.InsertFieldCode = this.Factory.CreateRibbonButton();
             this.btn_InsertEquation = this.Factory.CreateRibbonButton();
             this.CodeGroup = this.Factory.CreateRibbonGroup();
+            this.btn_ImportHighlightCode = this.Factory.CreateRibbonButton();
             this.btn_InsertCodeBox = this.Factory.CreateRibbonButton();
             this.dropDown_lineStep = this.Factory.CreateRibbonDropDown();
             this.dropDown_CodeFont_ASCII = this.Factory.CreateRibbonDropDown();
@@ -98,6 +99,7 @@ namespace Equation_and_Codebox {
             // 
             // CodeGroup
             // 
+            this.CodeGroup.Items.Add(this.btn_ImportHighlightCode);
             this.CodeGroup.Items.Add(this.btn_InsertCodeBox);
             this.CodeGroup.Items.Add(this.dropDown_lineStep);
             this.CodeGroup.Items.Add(this.dropDown_CodeFont_ASCII);
@@ -105,11 +107,19 @@ namespace Equation_and_Codebox {
             this.CodeGroup.Label = "代码";
             this.CodeGroup.Name = "CodeGroup";
             // 
+            // btn_ImportHighlightCode
+            // 
+            this.btn_ImportHighlightCode.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.btn_ImportHighlightCode.Label = "自动导入高亮代码";
+            this.btn_ImportHighlightCode.Name = "btn_ImportHighlightCode";
+            this.btn_ImportHighlightCode.ShowImage = true;
+            this.btn_ImportHighlightCode.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_ImportHighlightCode_Click);
+            // 
             // btn_InsertCodeBox
             // 
             this.btn_InsertCodeBox.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
             this.btn_InsertCodeBox.Image = global::Equation_and_Codebox.Properties.Resources.InsertCode;
-            this.btn_InsertCodeBox.Label = "从剪贴板插入代码";
+            this.btn_InsertCodeBox.Label = "从剪贴板插入纯文本代码";
             this.btn_InsertCodeBox.Name = "btn_InsertCodeBox";
             this.btn_InsertCodeBox.ShowImage = true;
             this.btn_InsertCodeBox.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_InsertCodeBox_Click);
@@ -206,6 +216,7 @@ namespace Equation_and_Codebox {
         internal Microsoft.Office.Tools.Ribbon.RibbonDropDown dropDown_lineStep;
         internal Microsoft.Office.Tools.Ribbon.RibbonDropDown dropDown_CodeFont_ASCII;
         internal Microsoft.Office.Tools.Ribbon.RibbonDropDown dropDown_CodeFont_FarEast;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_ImportHighlightCode;
     }
 
     partial class ThisRibbonCollection {

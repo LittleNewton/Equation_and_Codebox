@@ -272,5 +272,18 @@ namespace Equation_and_Codebox {
 
             MessageBox.Show("Copyright @刘鹏, 2020,\nContact: littleNewton6@gmail.com");
         }
+
+
+
+
+
+        /// <summary>
+        /// 根据 Word 域中的路径，自动导入高亮代码
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_ImportHighlightCode_Click(object sender, RibbonControlEventArgs e) {
+
+        }
     }
 }
