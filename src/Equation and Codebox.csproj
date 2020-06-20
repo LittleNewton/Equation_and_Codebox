@@ -193,10 +193,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="src\About.resx">
+    <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="src\MainRibbon.resx">
+    <EmbeddedResource Include="MainRibbon.resx">
       <DependentUpon>MainRibbon.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Equation and Codebox_TemporaryKey.pfx" />
@@ -208,16 +208,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="src\About.cs">
+    <Compile Include="About.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="src\About.Designer.cs">
+    <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\MainRibbon.cs">
+    <Compile Include="MainRibbon.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="src\MainRibbon.Designer.cs">
+    <Compile Include="MainRibbon.Designer.cs">
       <DependentUpon>MainRibbon.cs</DependentUpon>
     </Compile>
     <Compile Include="ThisAddIn.cs">
@@ -263,6 +263,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="img\矢量图版本\About.wmf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\InsertFieldCode.wmf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\About.wmf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ASCII.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delta.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FarEast.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\InsertCode.wmf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\InsertEquation.wmf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\效果图.jpg" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

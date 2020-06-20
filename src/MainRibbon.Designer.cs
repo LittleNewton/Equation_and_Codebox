@@ -49,7 +49,6 @@ namespace Equation_and_Codebox {
             this.InsertFieldCode = this.Factory.CreateRibbonButton();
             this.btn_InsertEquation = this.Factory.CreateRibbonButton();
             this.CodeGroup = this.Factory.CreateRibbonGroup();
-            this.btn_ImportHighlightCode = this.Factory.CreateRibbonButton();
             this.btn_InsertCodeBox = this.Factory.CreateRibbonButton();
             this.dropDown_lineStep = this.Factory.CreateRibbonDropDown();
             this.dropDown_CodeFont_ASCII = this.Factory.CreateRibbonDropDown();
@@ -99,21 +98,12 @@ namespace Equation_and_Codebox {
             // 
             // CodeGroup
             // 
-            this.CodeGroup.Items.Add(this.btn_ImportHighlightCode);
             this.CodeGroup.Items.Add(this.btn_InsertCodeBox);
             this.CodeGroup.Items.Add(this.dropDown_lineStep);
             this.CodeGroup.Items.Add(this.dropDown_CodeFont_ASCII);
             this.CodeGroup.Items.Add(this.dropDown_CodeFont_FarEast);
             this.CodeGroup.Label = "代码";
             this.CodeGroup.Name = "CodeGroup";
-            // 
-            // btn_ImportHighlightCode
-            // 
-            this.btn_ImportHighlightCode.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.btn_ImportHighlightCode.Label = "自动导入高亮代码";
-            this.btn_ImportHighlightCode.Name = "btn_ImportHighlightCode";
-            this.btn_ImportHighlightCode.ShowImage = true;
-            this.btn_ImportHighlightCode.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_ImportHighlightCode_Click);
             // 
             // btn_InsertCodeBox
             // 
@@ -141,7 +131,7 @@ namespace Equation_and_Codebox {
             // 
             // dropDown_CodeFont_ASCII
             // 
-            this.dropDown_CodeFont_ASCII.Image = global::Equation_and_Codebox.Properties.Resources.ASCII;
+            this.dropDown_CodeFont_ASCII.Image = global::Equation_and_Codebox.Properties.Resources.AsciiCharFont;
             ribbonDropDownItemImpl5.Label = "LM Mono 10";
             ribbonDropDownItemImpl6.Label = "Fira Code";
             ribbonDropDownItemImpl7.Label = "Iosevka";
@@ -158,7 +148,7 @@ namespace Equation_and_Codebox {
             // 
             // dropDown_CodeFont_FarEast
             // 
-            this.dropDown_CodeFont_FarEast.Image = global::Equation_and_Codebox.Properties.Resources.FarEast;
+            this.dropDown_CodeFont_FarEast.Image = global::Equation_and_Codebox.Properties.Resources.FarEastCharFont;
             ribbonDropDownItemImpl10.Label = "宋体";
             ribbonDropDownItemImpl11.Label = "等线";
             ribbonDropDownItemImpl12.Label = "微软雅黑";
@@ -216,7 +206,6 @@ namespace Equation_and_Codebox {
         internal Microsoft.Office.Tools.Ribbon.RibbonDropDown dropDown_lineStep;
         internal Microsoft.Office.Tools.Ribbon.RibbonDropDown dropDown_CodeFont_ASCII;
         internal Microsoft.Office.Tools.Ribbon.RibbonDropDown dropDown_CodeFont_FarEast;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_ImportHighlightCode;
     }
 
     partial class ThisRibbonCollection {

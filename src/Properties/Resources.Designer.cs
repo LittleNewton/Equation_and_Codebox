@@ -73,9 +73,9 @@ namespace Equation_and_Codebox.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ASCII {
+        internal static System.Drawing.Bitmap AsciiCharFont {
             get {
-                object obj = ResourceManager.GetObject("ASCII", resourceCulture);
+                object obj = ResourceManager.GetObject("AsciiCharFont", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace Equation_and_Codebox.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap FarEast {
+        internal static System.Drawing.Bitmap FarEastCharFont {
             get {
-                object obj = ResourceManager.GetObject("FarEast", resourceCulture);
+                object obj = ResourceManager.GetObject("FarEastCharFont", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -126,6 +126,16 @@ namespace Equation_and_Codebox.Properties {
         internal static System.Drawing.Bitmap InsertFieldCode {
             get {
                 object obj = ResourceManager.GetObject("InsertFieldCode", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap 效果图 {
+            get {
+                object obj = ResourceManager.GetObject("效果图", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
