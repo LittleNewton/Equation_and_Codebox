@@ -1,0 +1,8 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\.NETFramework\Security\TrustManager\PromptingLevel]
+"MyComputer"="Enabled"
+"LocalIntranet"="Enabled"
+"Internet"="Enabled"
+"TrustedSites"="Enabled"
+"UntrustedSites"="Enabled"
