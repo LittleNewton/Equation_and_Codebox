@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=11">
+	<meta charset="utf-8">
+	<title>Callee</title>
+	<link rel="stylesheet" href="./styles/vs.css">
+
+	<style>
+		body {
+			padding: 0px;
+			font-family: sans-serif;
+		}
+		.editor textarea {
+			display: block;
+			width: 100%;
+			height: 30em;
+		}
+		pre code,
+		pre output {
+			display: block;
+			padding: 0px !important;
+		}
+	</style>
+
+	<script src="./highlight.js"></script>
+	<script>
+		function test() {
+			return "AAAAAAAAA";
+		}
+
+		// 1. 高亮函数
+		function HighlightCode(language, source) {
+			var editor = document.getElementById("myEditor");
+			var source = document.getElementById("mainTextArea");
+			var result = hljs.highlight('cpp', source.value, true);
+			// var result = hljs.highlight(language, source, true);
+			document.getElementById("codes").innerHTML = result.value;
+		}
+
+		// 2. 以元素 ID 为选择器，将内容复制到剪贴板
+		function CopyToClipboard(element) {
+			var doc = document
+			, text = doc.getElementById(element)
+			, range, selection;
+
+			if (doc.body.createTextRange) {
+				range = doc.body.createTextRange();
+				range.moveToElementText(text);
+				range.select();
+			} else if (window.getSelection) {
+				selection = window.getSelection();
+				range = doc.createRange();
+				range.selectNodeContents(text);
+				selection.removeAllRanges();
+				selection.addRange(range);
+			}
+			document.execCommand('copy');
+			window.getSelection().removeAllRanges();
+		}
+
+		// 3. 点击按钮的综合行为
+		function DoAllActions() {
+			HighlightCode();
+			CopyToClipboard('codes');
+		}
+	</script>
+</head>
+<body>
+	<div class="editor" id="myEditor">
+		<textarea id="mainTextArea"></textarea>
+		<p><button id="btn_Highlight_and_Copy" onclick="DoAllActions()">渲染代码并将其复制到剪贴板</button></p>
+		<pre><code class="hljs" id='codes'>渲染后的代码</code></pre>
+	</div>
+</body>
+</html>

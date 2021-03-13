@@ -1,0 +1,25 @@
+# 编译的产物及中间产物
+bin/
+obj/
+
+# IDE 中间文件
+.vs/
+.vocode/
+
+.DS_Store
+build
+docs/_build
+__pycache__
+*.swp
+node_modules
+.project
+yarn.lock
+extra/
+
+# editors
+.idea/
+.vscode/
+.Rproj.user
+
+# misc
+/work
