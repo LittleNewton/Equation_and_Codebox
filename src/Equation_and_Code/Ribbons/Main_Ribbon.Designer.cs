@@ -105,7 +105,7 @@
             // 
             this.btn_InsertCodeBox.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
             this.btn_InsertCodeBox.Image = ((System.Drawing.Image)(resources.GetObject("btn_InsertCodeBox.Image")));
-            this.btn_InsertCodeBox.Label = "从剪贴板插入纯文本代码";
+            this.btn_InsertCodeBox.Label = "从剪贴板插入代码";
             this.btn_InsertCodeBox.Name = "btn_InsertCodeBox";
             this.btn_InsertCodeBox.ShowImage = true;
             this.btn_InsertCodeBox.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_InsertCodeBox_Click);
@@ -202,7 +202,4 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup Group_About;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_AboutAddinAndAuthor;
     }
-
-
-
 }
