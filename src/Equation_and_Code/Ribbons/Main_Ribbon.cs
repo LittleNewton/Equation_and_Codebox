@@ -149,6 +149,35 @@ namespace Equation_and_Code.Ribbon {
 
 
         /// <summary>
+        /// 获取中英文混杂的字符串的实际占位宽度
+        /// (1) ASCII 字符占 1 个半角
+        /// (2) 其他字符占 2 个半角
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        private static int GetStrLength(string str) {
+
+            // 如果空字符串，直接返回长度为 0
+            if (string.IsNullOrEmpty(str)) {
+                return 0;
+            }
+
+            ASCIIEncoding ascii = new ASCIIEncoding();
+            int tempLen = 0;
+            byte[] s = ascii.GetBytes(str);
+            for (int i = 0; i < s.Length; i++) {
+                if ((int)s[i] == 63) {
+                    tempLen += 2;
+                } else {
+                    tempLen += 1;
+                }
+            }
+            return tempLen;
+        }
+
+
+
+        /// <summary>
         /// 将剪贴板中的内容放入表格，自动生成行号
         /// </summary>
         /// <param name="sender"></param>
@@ -205,50 +234,43 @@ namespace Equation_and_Code.Ribbon {
             int maxStep = Int32.Parse(dropDown_lineStep.SelectedItem.ToString());
             // int maxCharsOfEachLine = 97; // LM Mono 10, 9pt, 16.5cm
             int maxCharsOfEachLine = 102;   // Iosevka, 9pt, 16.5cm
-            int numOfPrint = numberOfLines / maxStep;
             {
+                // 某逻辑行对应的 word 物理行数
                 string totalLines = "";
-                if (maxStep == 1) {
-                    int numOfLineBreaks = 0;
-                    for (int i = 1; i <= numberOfLines - 1; i++) {
-                        int remainder = AllLines[i - 1].Length % maxCharsOfEachLine;
-                        int isRemainderExist = 0;
-                        if (remainder == 0) {
-                            isRemainderExist = 0;
-                        }
-                        else {
-                            isRemainderExist = 1;
-                        }
-                        numOfLineBreaks = AllLines[i - 1].Length / maxCharsOfEachLine + isRemainderExist;
+
+                // 某逻辑行在该 maxStep 下需要的换行数
+                int numOfLineBreaks;
+                
+                // 
+                for (int i = 1; i <= numberOfLines - 1; i++) {
+
+                    // 单行字符数多于 maxCharsOfEachLine 时，多出的字符数量
+                    int remainder = GetStrLength(AllLines[i - 1]) % maxCharsOfEachLine;
+
+                    // 根据 remainder 判断该行是否存在溢出的字符
+                    int isRemainderExist;
+                    if (remainder == 0) {
+                        isRemainderExist = 0;
+                    }
+                    else {
+                        isRemainderExist = 1;
+                    }
+
+                    // 计算出该逻辑行在该 maxStep 下需要的换行数
+                    numOfLineBreaks = GetStrLength(AllLines[i - 1]) / maxCharsOfEachLine + isRemainderExist;
+
+                    // 判断：如果当前逻辑行的行号不能被 maxStep 整除，则不打印该行的逻辑行号
+                    if (i % maxStep == 0) {
                         totalLines = totalLines + i.ToString();
-                        for (int j = 0; j < numOfLineBreaks; j++) {
-                            totalLines = totalLines + "\n";
-                        }
                     }
-                    totalLines = totalLines + numberOfLines.ToString();
-                }
-                else {
-                    // 先存储 1 和 maxStep - 1 个换行符
-                    totalLines = totalLines + 1.ToString();
-                    for (int i = 1; i <= (maxStep - 1); i++) {
-                        totalLines = totalLines + "\n";
-                    }
-
-                    // 打印 maxStep 开始的整数组字符
-                    for (int i = 1; i <= numOfPrint - 1; i++) {
-                        totalLines = totalLines + (i * maxStep).ToString();
-                        for (int j = 1; j <= maxStep; j++) {
-                            totalLines = totalLines + "\n";
-                        }
-                    }
-                    totalLines = totalLines + (numOfPrint * maxStep).ToString();
-
-                    // 打印最后的零散空格
-                    int numOfRemainder = numberOfLines % maxStep;
-                    for (int i = 1; i <= (numOfRemainder); i++) {
+                    
+                    for (int j = 0; j < numOfLineBreaks; j++) {
                         totalLines = totalLines + "\n";
                     }
                 }
+                totalLines = totalLines + numberOfLines.ToString();
+
+                // 在代码表格的第一列输出渲染得到的行号
                 app.Selection.TypeText(totalLines);
             }
 
