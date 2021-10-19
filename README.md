@@ -70,7 +70,7 @@ GitHub 链接：https://github.com/LittleNewton/Equation_and_Codebox
 
 #### 3.2.2 自主设置行号的步长
 
-当每行代码不超过 `101` 个**半角字符**时，可以自主设置行号步长。如下图所示。
+用户可以自主设置行号步长。如下图所示。**该功能现已支持中英文字符混合的代码，且不再对单行文本长度做限制。**
 
 ![自主设置步长](img/Demo_Set_LineNum_Step.gif)
 
