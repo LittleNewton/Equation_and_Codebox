@@ -67,7 +67,7 @@ namespace Equation_and_Code.Ribbon {
             Word.Document doc = app.ActiveDocument;
 
             // 计算相关版面参数
-            Dictionary<string, float> page_info = GetMaxCharOfEachLine();
+            Dictionary<string, float> page_info = GetDocLayout();
 
             // 计算边界值
             float LeftMargin = page_info["LeftMargin"];
@@ -99,10 +99,10 @@ namespace Equation_and_Code.Ribbon {
             equationTable.Cell(1, 3).Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight;
 
             // 设置段前、后的距离
-            rng.ParagraphFormat.LineUnitBefore = 0;
-            rng.ParagraphFormat.LineUnitAfter = 0;
-            rng.ParagraphFormat.SpaceBefore = 0;
-            rng.ParagraphFormat.SpaceAfter = 0;
+            rng.ParagraphFormat.LineUnitBefore  = 0;
+            rng.ParagraphFormat.LineUnitAfter   = 0;
+            rng.ParagraphFormat.SpaceBefore     = 0;
+            rng.ParagraphFormat.SpaceAfter      = 0;
             rng.ParagraphFormat.LineSpacingRule = Word.WdLineSpacing.wdLineSpaceAtLeast;
             rng.ParagraphFormat.LineSpacing = 12;
 
@@ -185,7 +185,7 @@ namespace Equation_and_Code.Ribbon {
         ///     (1) 不需要传参，默认读取当前页面
         ///     (2) 返回字典对象，LeftMargin and RightMargin
         /// </summary>
-        Dictionary<string, float> GetMaxCharOfEachLine () {
+        Dictionary<string, float> GetDocLayout() {
 
             var PageInfo = new Dictionary<string, float>();
 
@@ -196,13 +196,9 @@ namespace Equation_and_Code.Ribbon {
             float RightMargin  = doc.PageSetup.RightMargin;
             float PageWidth    = doc.PageSetup.PageWidth;
 
-            // Fonts.Font CodeFont = new Fonts.Font("Iosevka", 9);
-            // int maxCharsOfEachLine = (int)((PageWidth - (LeftMargin + RightMargin)) / (CodeFont.SizeInPoints / 2));
-
             PageInfo.Add("LeftMargin",  LeftMargin);
             PageInfo.Add("RightMargin", RightMargin);
             PageInfo.Add("PageWidth",   PageWidth);
-
 
             return PageInfo;
         }
@@ -212,25 +208,11 @@ namespace Equation_and_Code.Ribbon {
 
 
         /// <summary>
-        /// 获取字体的信息
-        /// </summary>
-        /// <returns></returns>
-        Dictionary<string, double> GetFontInfo (Fonts.Font font) {
-            Dictionary<string, double> FontInfo = new Dictionary<string, double>();
-
-            // font.width
-            // FontInfo.Add("")
-            return FontInfo;
-        }
-
-
-
-        /// <summary>
         /// 将剪贴板中的内容放入表格，自动生成行号
         ///     (1) TODO:
-        ///         I.   [OK]  获取页面宽度
-        ///         II.  [  ]  获取字体的宽度，写一个下拉菜单，获取字体的磅值 
-        ///         III. [OK]  计算出 maxCharsOfEachLine 的值
+        ///         I.   [*]  获取页面宽度
+        ///         II.  [ ]  获取字体的宽度，写一个下拉菜单，获取字体的磅值 
+        ///         III. [*]  计算出 maxCharsOfEachLine 的值
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -241,19 +223,22 @@ namespace Equation_and_Code.Ribbon {
             Word.Document doc = app.ActiveDocument;
             
             // 根据下拉列表选择西文字体，默认字符为 9pt (9 points)
+            // TO-DO: 字体的类型已经可以根据下拉菜单选取，后续添加根据下拉菜单选择字体大小的功能
             Fonts.Font CodeFont = new Fonts.Font(dropDown_CodeFont_ASCII.SelectedItem.ToString(), 9);
 
             // 计算相关版面参数
-            Dictionary<string, float> page_info = GetMaxCharOfEachLine();
-            
-            // 实际能输入的字符数，行号占 3 个字符
-            float LeftMargin        = page_info["LeftMargin"];
-            float RightMargin       = page_info["RightMargin"];
-            float PageWidth         = page_info["PageWidth"];
+            Dictionary<string, float> page_layout = GetDocLayout();
+            float LeftMargin        = page_layout["LeftMargin"];
+            float RightMargin       = page_layout["RightMargin"];
+            float PageWidth         = page_layout["PageWidth"];
+
+            // 计算实际可用的值
+            // TO-DO: 行号 WidthForLineNum 所占的宽度要根据代码行数动态计算
             float WidthAvailable    = PageWidth - (LeftMargin + RightMargin);
             float WidthForLineNum   = app.CentimetersToPoints(0.75f);
             float WidthForCodes     = WidthAvailable - WidthForLineNum;
 
+            // TO-DO: 检查这个计算单个西文字符宽度的方法是否正确
             int maxCharsOfEachLine = (int)(WidthForCodes / (CodeFont.SizeInPoints / 2));
 
             // 在光标处插入一个名为 CodeTable 的表格
@@ -267,21 +252,22 @@ namespace Equation_and_Code.Ribbon {
             codeTable.Cell(1, 2).SetWidth(WidthForCodes,    Word.WdRulerStyle.wdAdjustNone);
 
             // 整体边界填充
-            codeTable.LeftPadding = app.CentimetersToPoints(0.1f);
+            codeTable.LeftPadding  = app.CentimetersToPoints(0.1f);
             codeTable.RightPadding = app.CentimetersToPoints(0.1f);
 
             // 设置段前、后的距离
-            codeTable.Range.ParagraphFormat.LineUnitBefore = 0;
-            codeTable.Range.ParagraphFormat.LineUnitAfter = 0;
-            codeTable.Range.ParagraphFormat.SpaceBefore = 0;
-            codeTable.Range.ParagraphFormat.SpaceAfter = 0;
+            codeTable.Range.ParagraphFormat.LineUnitBefore  = 0;
+            codeTable.Range.ParagraphFormat.LineUnitAfter   = 0;
+            codeTable.Range.ParagraphFormat.SpaceBefore     = 0;
+            codeTable.Range.ParagraphFormat.SpaceAfter      = 0;
 
-            // 设置行距
+            // 设置行距未固定 12pt
             codeTable.Range.ParagraphFormat.LineSpacingRule = Word.WdLineSpacing.wdLineSpaceExactly;
             codeTable.Range.ParagraphFormat.LineSpacing = 12;
 
-            // 设置字体
-            codeTable.Range.Font.NameAscii = dropDown_CodeFont_ASCII.SelectedItem.ToString();
+            // 设置字体及其大小
+            // TO-DO: 根据下拉菜单动态生成合适的字体大小
+            codeTable.Range.Font.NameAscii   = dropDown_CodeFont_ASCII.SelectedItem.ToString();
             codeTable.Range.Font.NameFarEast = dropDown_CodeFont_FarEast.SelectedItem.ToString();
             codeTable.Range.Font.Size = 9;
 
@@ -300,8 +286,6 @@ namespace Equation_and_Code.Ribbon {
 
             // 打印连续的行号，最大步长 maxStep 从下拉菜单中选择，默认为 1
             int maxStep = Int32.Parse(dropDown_lineStep.SelectedItem.ToString());
-            // int maxCharsOfEachLine =  97;    // LM Mono 10, 9pt, 16.5cm
-            // int maxCharsOfEachLine = 102;    // Iosevka, 9pt, 16.5cm     102
             {
                 // 某逻辑行对应的 word 物理行数
                 string totalLines = "";
@@ -319,24 +303,25 @@ namespace Equation_and_Code.Ribbon {
                     int isRemainderExist;
                     if (remainder == 0) {
                         isRemainderExist = 0;
-                    }
-                    else {
+                    } else {
                         isRemainderExist = 1;
                     }
 
                     // 计算出该逻辑行在该 maxStep 下需要的换行数
                     numOfLineBreaks = GetStrLength(AllLines[i - 1]) / maxCharsOfEachLine + isRemainderExist;
 
-                    // 判断：如果当前逻辑行的行号不能被 maxStep 整除，则不打印该行的逻辑行号
+                    // 如果当前逻辑行的行号不能被 maxStep 整除，则不打印该行的逻辑行号
                     if (i % maxStep == 0) {
-                        totalLines = totalLines + i.ToString();
+                        totalLines += i.ToString();
                     }
                     
                     for (int j = 0; j < numOfLineBreaks; j++) {
-                        totalLines = totalLines + "\n";
+                        totalLines += "\n";
                     }
                 }
-                totalLines = totalLines + numberOfLines.ToString();
+
+                // 最后一行的行号务必打印
+                totalLines += numberOfLines.ToString();
 
                 // 在代码表格的第一列输出渲染得到的行号
                 app.Selection.TypeText(totalLines);
@@ -346,9 +331,11 @@ namespace Equation_and_Code.Ribbon {
             app.Selection.MoveRight(Word.WdUnits.wdCell, 1);
             app.Selection.Range.Paste();
 
-            // 调整代码单元格的内容
-            codeTable.Cell(1, 2).Range.Font.NameAscii = dropDown_CodeFont_ASCII.SelectedItem.ToString();
+            // 调整代码单元格的字体
+            codeTable.Cell(1, 2).Range.Font.NameAscii   = dropDown_CodeFont_ASCII.SelectedItem.ToString();
             codeTable.Cell(1, 2).Range.Font.NameFarEast = dropDown_CodeFont_FarEast.SelectedItem.ToString();
+            
+            // 设置代码单元格的字体为 9pt
             codeTable.Cell(1, 2).Range.Font.Size = 9;
             codeTable.Cell(1, 2).Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphLeft;
             codeTable.Cell(1, 2).Range.ParagraphFormat.AddSpaceBetweenFarEastAndAlpha = 0;

@@ -41,6 +41,7 @@
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl10 = this.Factory.CreateRibbonDropDownItem();
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl11 = this.Factory.CreateRibbonDropDownItem();
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl12 = this.Factory.CreateRibbonDropDownItem();
+            Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl13 = this.Factory.CreateRibbonDropDownItem();
             this.公式与代码 = this.Factory.CreateRibbonTab();
             this.Group_Equation = this.Factory.CreateRibbonGroup();
             this.btn_InsertFieldCode = this.Factory.CreateRibbonButton();
@@ -136,6 +137,9 @@
             // dropDown1
             // 
             this.dropDown1.Image = ((System.Drawing.Image)(resources.GetObject("dropDown1.Image")));
+            ribbonDropDownItemImpl5.Label = "9";
+            ribbonDropDownItemImpl5.Tag = "";
+            this.dropDown1.Items.Add(ribbonDropDownItemImpl5);
             this.dropDown1.Label = "字体大小";
             this.dropDown1.Name = "dropDown1";
             this.dropDown1.ShowImage = true;
@@ -147,16 +151,16 @@
             // dropDown_CodeFont_ASCII
             // 
             this.dropDown_CodeFont_ASCII.Image = ((System.Drawing.Image)(resources.GetObject("dropDown_CodeFont_ASCII.Image")));
-            ribbonDropDownItemImpl5.Label = "Iosevka";
-            ribbonDropDownItemImpl6.Label = "LM Mono 10";
-            ribbonDropDownItemImpl7.Label = "Fira Code";
-            ribbonDropDownItemImpl8.Label = "Consolas";
-            ribbonDropDownItemImpl9.Label = "宋体";
-            this.dropDown_CodeFont_ASCII.Items.Add(ribbonDropDownItemImpl5);
+            ribbonDropDownItemImpl6.Label = "Iosevka";
+            ribbonDropDownItemImpl7.Label = "LM Mono 10";
+            ribbonDropDownItemImpl8.Label = "Fira Code";
+            ribbonDropDownItemImpl9.Label = "Consolas";
+            ribbonDropDownItemImpl10.Label = "宋体";
             this.dropDown_CodeFont_ASCII.Items.Add(ribbonDropDownItemImpl6);
             this.dropDown_CodeFont_ASCII.Items.Add(ribbonDropDownItemImpl7);
             this.dropDown_CodeFont_ASCII.Items.Add(ribbonDropDownItemImpl8);
             this.dropDown_CodeFont_ASCII.Items.Add(ribbonDropDownItemImpl9);
+            this.dropDown_CodeFont_ASCII.Items.Add(ribbonDropDownItemImpl10);
             this.dropDown_CodeFont_ASCII.Label = "代码字体";
             this.dropDown_CodeFont_ASCII.Name = "dropDown_CodeFont_ASCII";
             this.dropDown_CodeFont_ASCII.ShowImage = true;
@@ -164,12 +168,12 @@
             // dropDown_CodeFont_FarEast
             // 
             this.dropDown_CodeFont_FarEast.Image = ((System.Drawing.Image)(resources.GetObject("dropDown_CodeFont_FarEast.Image")));
-            ribbonDropDownItemImpl10.Label = "宋体";
-            ribbonDropDownItemImpl11.Label = "等线";
-            ribbonDropDownItemImpl12.Label = "微软雅黑";
-            this.dropDown_CodeFont_FarEast.Items.Add(ribbonDropDownItemImpl10);
+            ribbonDropDownItemImpl11.Label = "宋体";
+            ribbonDropDownItemImpl12.Label = "等线";
+            ribbonDropDownItemImpl13.Label = "微软雅黑";
             this.dropDown_CodeFont_FarEast.Items.Add(ribbonDropDownItemImpl11);
             this.dropDown_CodeFont_FarEast.Items.Add(ribbonDropDownItemImpl12);
+            this.dropDown_CodeFont_FarEast.Items.Add(ribbonDropDownItemImpl13);
             this.dropDown_CodeFont_FarEast.Label = "中文字体";
             this.dropDown_CodeFont_FarEast.Name = "dropDown_CodeFont_FarEast";
             this.dropDown_CodeFont_FarEast.ShowImage = true;
