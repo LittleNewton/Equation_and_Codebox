@@ -48,14 +48,19 @@
             this.Group_Code = this.Factory.CreateRibbonGroup();
             this.btn_InsertCodeBox = this.Factory.CreateRibbonButton();
             this.dropDown_lineStep = this.Factory.CreateRibbonDropDown();
+            this.dropDown1 = this.Factory.CreateRibbonDropDown();
+            this.separator1 = this.Factory.CreateRibbonSeparator();
             this.dropDown_CodeFont_ASCII = this.Factory.CreateRibbonDropDown();
             this.dropDown_CodeFont_FarEast = this.Factory.CreateRibbonDropDown();
             this.Group_About = this.Factory.CreateRibbonGroup();
             this.btn_AboutAddinAndAuthor = this.Factory.CreateRibbonButton();
+            this.TestGroup = this.Factory.CreateRibbonGroup();
+            this.TestBtn = this.Factory.CreateRibbonButton();
             this.公式与代码.SuspendLayout();
             this.Group_Equation.SuspendLayout();
             this.Group_Code.SuspendLayout();
             this.Group_About.SuspendLayout();
+            this.TestGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // 公式与代码
@@ -64,6 +69,7 @@
             this.公式与代码.Groups.Add(this.Group_Equation);
             this.公式与代码.Groups.Add(this.Group_Code);
             this.公式与代码.Groups.Add(this.Group_About);
+            this.公式与代码.Groups.Add(this.TestGroup);
             this.公式与代码.Label = "公式与代码";
             this.公式与代码.Name = "公式与代码";
             // 
@@ -96,6 +102,8 @@
             // 
             this.Group_Code.Items.Add(this.btn_InsertCodeBox);
             this.Group_Code.Items.Add(this.dropDown_lineStep);
+            this.Group_Code.Items.Add(this.dropDown1);
+            this.Group_Code.Items.Add(this.separator1);
             this.Group_Code.Items.Add(this.dropDown_CodeFont_ASCII);
             this.Group_Code.Items.Add(this.dropDown_CodeFont_FarEast);
             this.Group_Code.Label = "代码";
@@ -124,6 +132,17 @@
             this.dropDown_lineStep.Label = "行号步长";
             this.dropDown_lineStep.Name = "dropDown_lineStep";
             this.dropDown_lineStep.ShowImage = true;
+            // 
+            // dropDown1
+            // 
+            this.dropDown1.Image = ((System.Drawing.Image)(resources.GetObject("dropDown1.Image")));
+            this.dropDown1.Label = "字体大小";
+            this.dropDown1.Name = "dropDown1";
+            this.dropDown1.ShowImage = true;
+            // 
+            // separator1
+            // 
+            this.separator1.Name = "separator1";
             // 
             // dropDown_CodeFont_ASCII
             // 
@@ -170,6 +189,21 @@
             this.btn_AboutAddinAndAuthor.ShowImage = true;
             this.btn_AboutAddinAndAuthor.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AboutAddinAndAuthor_Click);
             // 
+            // TestGroup
+            // 
+            this.TestGroup.Items.Add(this.TestBtn);
+            this.TestGroup.Label = "TEST";
+            this.TestGroup.Name = "TestGroup";
+            // 
+            // TestBtn
+            // 
+            this.TestBtn.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.TestBtn.Image = ((System.Drawing.Image)(resources.GetObject("TestBtn.Image")));
+            this.TestBtn.Label = "test";
+            this.TestBtn.Name = "TestBtn";
+            this.TestBtn.ShowImage = true;
+            this.TestBtn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.TestBtn_Click);
+            // 
             // Main_Ribbon
             // 
             this.Name = "Main_Ribbon";
@@ -184,6 +218,8 @@
             this.Group_Code.PerformLayout();
             this.Group_About.ResumeLayout(false);
             this.Group_About.PerformLayout();
+            this.TestGroup.ResumeLayout(false);
+            this.TestGroup.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -201,5 +237,9 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonDropDown dropDown_CodeFont_FarEast;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup Group_About;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_AboutAddinAndAuthor;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup TestGroup;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton TestBtn;
+        internal Microsoft.Office.Tools.Ribbon.RibbonDropDown dropDown1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonSeparator separator1;
     }
 }

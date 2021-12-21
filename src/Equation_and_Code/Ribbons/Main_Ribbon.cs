@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.IO;
 using System.Windows.Forms;
 using Microsoft.Office.Tools.Ribbon;
 using Word = Microsoft.Office.Interop.Word;
-using Microsoft.Office.Interop.Word;
-using Microsoft.VisualBasic;
-using Equation_and_Code.Form_About;
+using Fonts = System.Drawing;
 
 
 
@@ -39,14 +36,14 @@ namespace Equation_and_Code.Ribbon {
             // 插入域代码
             {
                 // { SEQ chapter \h }
-                Field chapterNumber = app.Selection.Range.Fields.Add(
+                Word.Field chapterNumber = app.Selection.Range.Fields.Add(
                     app.Selection.Range,
                     Word.WdFieldType.wdFieldSequence,
                     @"chapter \h",
                     false
                 );
                 // { SEQ equation \r \h }
-                Field equationNumber = app.Selection.Range.Fields.Add(
+                Word.Field equationNumber = app.Selection.Range.Fields.Add(
                     app.Selection.Range,
                     Word.WdFieldType.wdFieldSequence,
                     @"equation \r \h",
@@ -65,27 +62,30 @@ namespace Equation_and_Code.Ribbon {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btn_InsertEquation_Click(object sender, RibbonControlEventArgs e) {
-            // 创建一个 Word Doc 变量
+            // 创建一个 Word Document 变量
             Word.Application app = Globals.ThisAddIn.Application;
             Word.Document doc = app.ActiveDocument;
 
+            // 计算相关版面参数
+            Dictionary<string, float> page_info = GetMaxCharOfEachLine();
+
+            // 计算边界值
+            float LeftMargin = page_info["LeftMargin"];
+            float RightMargin = page_info["RightMargin"];
+            float PageWidth = page_info["PageWidth"];
+            float WidthAvailable = PageWidth - (LeftMargin + RightMargin);
+            float WidthForLeft = app.CentimetersToPoints(1.75f);
+            float WidthForRight = app.CentimetersToPoints(1.75f);
+            float WidthForMiddle = WidthAvailable - (WidthForLeft + WidthForRight);
+
             // 在光标处插入一个名为 equationTable 的表格
             Word.Table equationTable = app.Selection.Tables.Add(app.Selection.Range, 1, 3);
-            Range rng = equationTable.Range;
+            Word.Range rng = equationTable.Range;
 
             // 设置 equationTable 每个单元格的具体宽度
-            equationTable.Cell(1, 1).SetWidth(
-                app.CentimetersToPoints(1.75f),
-                Word.WdRulerStyle.wdAdjustNone
-            );
-            equationTable.Cell(1, 2).SetWidth(
-                app.CentimetersToPoints(13.5f),
-                Word.WdRulerStyle.wdAdjustNone
-            );
-            equationTable.Cell(1, 3).SetWidth(
-                app.CentimetersToPoints(1.75f),
-                Word.WdRulerStyle.wdAdjustNone
-            );
+            equationTable.Cell(1, 1).SetWidth(WidthForLeft,     Word.WdRulerStyle.wdAdjustNone);
+            equationTable.Cell(1, 2).SetWidth(WidthForMiddle,   Word.WdRulerStyle.wdAdjustNone);
+            equationTable.Cell(1, 3).SetWidth(WidthForRight,    Word.WdRulerStyle.wdAdjustNone);
 
             // 设置 equationTable 的整体边界距离为 0
             equationTable.LeftPadding = 0;
@@ -122,7 +122,7 @@ namespace Equation_and_Code.Ribbon {
                 app.Selection.TypeText("(");
 
                 // { SEQ Chapter \c } 
-                Field chapterNumber = app.Selection.Range.Fields.Add(
+                Word.Field chapterNumber = app.Selection.Range.Fields.Add(
                     app.Selection.Range,
                     Word.WdFieldType.wdFieldSequence,
                     @"chapter \c",
@@ -133,7 +133,7 @@ namespace Equation_and_Code.Ribbon {
                 app.Selection.TypeText("-");
 
                 // { SEQ Equation }
-                Field equationNumber = app.Selection.Range.Fields.Add(
+                Word.Field equationNumber = app.Selection.Range.Fields.Add(
                     app.Selection.Range,
                     Word.WdFieldType.wdFieldSequence,
                     @"equation",
@@ -150,8 +150,9 @@ namespace Equation_and_Code.Ribbon {
 
         /// <summary>
         /// 获取中英文混杂的字符串的实际占位宽度
-        /// (1) ASCII 字符占 1 个半角
-        /// (2) 其他字符占 2 个半角
+        ///     (1) ASCII 字符占 1 个半角
+        ///     (2) 其他字符占 2 个半角
+        ///     (3) TODO: TAB 制表符默认为 4 个空格宽度，这个太过复杂，需要写一个替换操作。
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
@@ -177,16 +178,83 @@ namespace Equation_and_Code.Ribbon {
 
 
 
+
+
+        /// <summary>
+        /// 获取当前 Word Document 的页边距
+        ///     (1) 不需要传参，默认读取当前页面
+        ///     (2) 返回字典对象，LeftMargin and RightMargin
+        /// </summary>
+        Dictionary<string, float> GetMaxCharOfEachLine () {
+
+            var PageInfo = new Dictionary<string, float>();
+
+            Word.Application app = Globals.ThisAddIn.Application;
+            Word.Document doc = app.ActiveDocument;
+
+            float LeftMargin   = doc.PageSetup.LeftMargin;
+            float RightMargin  = doc.PageSetup.RightMargin;
+            float PageWidth    = doc.PageSetup.PageWidth;
+
+            // Fonts.Font CodeFont = new Fonts.Font("Iosevka", 9);
+            // int maxCharsOfEachLine = (int)((PageWidth - (LeftMargin + RightMargin)) / (CodeFont.SizeInPoints / 2));
+
+            PageInfo.Add("LeftMargin",  LeftMargin);
+            PageInfo.Add("RightMargin", RightMargin);
+            PageInfo.Add("PageWidth",   PageWidth);
+
+
+            return PageInfo;
+        }
+
+
+
+
+
+        /// <summary>
+        /// 获取字体的信息
+        /// </summary>
+        /// <returns></returns>
+        Dictionary<string, double> GetFontInfo (Fonts.Font font) {
+            Dictionary<string, double> FontInfo = new Dictionary<string, double>();
+
+            // font.width
+            // FontInfo.Add("")
+            return FontInfo;
+        }
+
+
+
         /// <summary>
         /// 将剪贴板中的内容放入表格，自动生成行号
+        ///     (1) TODO:
+        ///         I.   [OK]  获取页面宽度
+        ///         II.  [  ]  获取字体的宽度，写一个下拉菜单，获取字体的磅值 
+        ///         III. [OK]  计算出 maxCharsOfEachLine 的值
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btn_InsertCodeBox_Click(object sender, RibbonControlEventArgs e) {
 
-            // 创建一个 Word Doc 变量
+            // 创建一个 Word Document 变量
             Word.Application app = Globals.ThisAddIn.Application;
             Word.Document doc = app.ActiveDocument;
+            
+            // 根据下拉列表选择西文字体，默认字符为 9pt (9 points)
+            Fonts.Font CodeFont = new Fonts.Font(dropDown_CodeFont_ASCII.SelectedItem.ToString(), 9);
+
+            // 计算相关版面参数
+            Dictionary<string, float> page_info = GetMaxCharOfEachLine();
+            
+            // 实际能输入的字符数，行号占 3 个字符
+            float LeftMargin        = page_info["LeftMargin"];
+            float RightMargin       = page_info["RightMargin"];
+            float PageWidth         = page_info["PageWidth"];
+            float WidthAvailable    = PageWidth - (LeftMargin + RightMargin);
+            float WidthForLineNum   = app.CentimetersToPoints(0.75f);
+            float WidthForCodes     = WidthAvailable - WidthForLineNum;
+
+            int maxCharsOfEachLine = (int)(WidthForCodes / (CodeFont.SizeInPoints / 2));
 
             // 在光标处插入一个名为 CodeTable 的表格
             Word.Table codeTable = app.Selection.Tables.Add(app.Selection.Range, 1, 2);
@@ -195,8 +263,8 @@ namespace Equation_and_Code.Ribbon {
             codeTable.Cell(1, 2).Borders.Enable = 1;
 
             // 设置单元格宽度
-            codeTable.Cell(1, 1).SetWidth(app.CentimetersToPoints(0.75f), Word.WdRulerStyle.wdAdjustNone);
-            codeTable.Cell(1, 2).SetWidth(app.CentimetersToPoints(16.25f), Word.WdRulerStyle.wdAdjustNone);
+            codeTable.Cell(1, 1).SetWidth(WidthForLineNum,  Word.WdRulerStyle.wdAdjustNone);
+            codeTable.Cell(1, 2).SetWidth(WidthForCodes,    Word.WdRulerStyle.wdAdjustNone);
 
             // 整体边界填充
             codeTable.LeftPadding = app.CentimetersToPoints(0.1f);
@@ -232,8 +300,8 @@ namespace Equation_and_Code.Ribbon {
 
             // 打印连续的行号，最大步长 maxStep 从下拉菜单中选择，默认为 1
             int maxStep = Int32.Parse(dropDown_lineStep.SelectedItem.ToString());
-            // int maxCharsOfEachLine = 97; // LM Mono 10, 9pt, 16.5cm
-            int maxCharsOfEachLine = 102;   // Iosevka, 9pt, 16.5cm
+            // int maxCharsOfEachLine =  97;    // LM Mono 10, 9pt, 16.5cm
+            // int maxCharsOfEachLine = 102;    // Iosevka, 9pt, 16.5cm     102
             {
                 // 某逻辑行对应的 word 物理行数
                 string totalLines = "";
@@ -312,6 +380,19 @@ namespace Equation_and_Code.Ribbon {
         private void btn_AboutAddinAndAuthor_Click(object sender, RibbonControlEventArgs e) {
             Form_About.Form_About AboutWindow = new Form_About.Form_About();
             AboutWindow.Show();
+        }
+
+
+
+
+        /// <summary>
+        /// TEST CODE
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TestBtn_Click(object sender, RibbonControlEventArgs e) {
+            // Font code_font = new Font('')
+            // GetDocumentInfo();
         }
     }
 }
