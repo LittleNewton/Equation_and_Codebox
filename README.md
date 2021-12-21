@@ -18,7 +18,7 @@ GitHub 链接：https://github.com/LittleNewton/Equation_and_Codebox
 
 ## 1. 编译方法（开发者必看）
 
-本插件基于 Visual Studio 2020 开发。
+本插件基于 Visual Studio 2022 开发。
 
 用 Visual Studio 2022 打开 `src/Equation and Code.sln` 即可对本项目进行更改、编译。
 
