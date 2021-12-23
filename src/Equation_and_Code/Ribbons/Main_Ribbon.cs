@@ -9,6 +9,7 @@ using JS = Microsoft.JScript;
 using System.CodeDom.Compiler;
 using System.Resources;
 using System.Reflection;
+using Jering.Web.SyntaxHighlighters.HighlightJS;
 
 namespace Equation_and_Code.Ribbon {
     public partial class Main_Ribbon {
@@ -367,6 +368,7 @@ namespace Equation_and_Code.Ribbon {
             Form_About.Form_About AboutWindow = new Form_About.Form_About();
             AboutWindow.Show();
         }
+        
 
 
 
@@ -376,37 +378,12 @@ namespace Equation_and_Code.Ribbon {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void TestBtn_Click(object sender, RibbonControlEventArgs e) {
-            int a = 10;
-            int b = 10;
+        private async void TestBtn_Click(object sender, RibbonControlEventArgs e) {
+            string code = Properties.Resources.test_js_plus;
 
-            // [*] 生成一个 JS 执行对象
-            JS.JScriptCodeProvider jsProvider = new JS.JScriptCodeProvider();
-
-            // [*] JS 编译选项
-            CompilerParameters coP  = new CompilerParameters() {
-                GenerateExecutable  = true, 
-                GenerateInMemory    = true
-            };
-
-            // [*] 从 JS 生成汇编代码
-            string str = Properties.Resources.test_js_plus.ToString();
-            // MessageBox.Show(str);
-            CompilerResults result = jsProvider.CompileAssemblyFromSource(coP, new string[] {str});
-
-            // [*] 检查编译错误
-            if (result.Errors.Count > 0) {
-                MessageBox.Show("Code errors");
-                throw new Exception("Code errors");
-            }
-
-            // [*] 运行时汇编对象，由 JS 代码生成
-            System.Reflection.Assembly js = result.CompiledAssembly;
-            dynamic JSobj = js.CreateInstance("JSObject");
-
-            // [*] 直接调用 JS 汇编对象的方法
-            int ans = System.Convert.ToInt32(JSobj.plus(a, b));
-            MessageBox.Show(ans.ToString());
+            // Highlight code
+            string result = await StaticHighlightJSService.HighlightAsync(code, "csharp");
+            MessageBox.Show(result);
         }
     }
 }
