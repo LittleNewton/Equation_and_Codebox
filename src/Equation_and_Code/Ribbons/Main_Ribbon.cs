@@ -6,10 +6,8 @@ using System.Windows.Forms;
 using Microsoft.Office.Tools.Ribbon;
 using Word = Microsoft.Office.Interop.Word;
 using Fonts = System.Drawing;
-
-
-
-
+using JS = Microsoft.JScript;
+using System.CodeDom.Compiler;
 
 namespace Equation_and_Code.Ribbon {
     public partial class Main_Ribbon {
@@ -378,8 +376,34 @@ namespace Equation_and_Code.Ribbon {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void TestBtn_Click(object sender, RibbonControlEventArgs e) {
-            // Font code_font = new Font('')
-            // GetDocumentInfo();
+            int a = 10;
+            int b = 10;
+
+            // [*] 生成一个 JS 执行对象
+            JS.JScriptCodeProvider jsProvider = new JS.JScriptCodeProvider();
+
+            // [*] JS 编译选项
+            CompilerParameters coP = new CompilerParameters() {
+                GenerateExecutable = false, 
+                GenerateInMemory = true
+            };
+
+            // [*] 从 JS 生成汇编代码
+            CompilerResults result = jsProvider.CompileAssemblyFromSource(coP, new string[] { "class JSObject{function mul(a,b){return a*b;}}" });
+
+            // [*] 检查编译错误
+            if (result.Errors.Count > 0) {
+                MessageBox.Show("Code errors");
+                throw new Exception("Code errors");
+            }
+
+            // [*] 运行时汇编对象，由 JS 代码生成
+            System.Reflection.Assembly js = result.CompiledAssembly;
+            dynamic JSobj = js.CreateInstance("JSObject");
+
+            // [*] 直接调用 JS 汇编对象的方法
+            int ans = System.Convert.ToInt32(JSobj.mul(a, b));
+            MessageBox.Show(ans.ToString());
         }
     }
 }

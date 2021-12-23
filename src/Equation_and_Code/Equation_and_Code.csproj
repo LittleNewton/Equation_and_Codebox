@@ -100,6 +100,7 @@
   -->
   <ItemGroup>
     <Reference Include="Accessibility" />
+    <Reference Include="Microsoft.JScript" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -208,6 +209,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Ribbons\icons\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="test_highlights\test.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
