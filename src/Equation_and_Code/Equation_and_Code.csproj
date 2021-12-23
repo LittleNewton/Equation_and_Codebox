@@ -177,6 +177,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Ribbons\Main_Ribbon.resx">
       <DependentUpon>Main_Ribbon.cs</DependentUpon>
@@ -211,7 +212,7 @@
     <Folder Include="Ribbons\icons\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="test_highlights\test.js" />
+    <None Include="Resources\test_js_plus.txt" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
