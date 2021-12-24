@@ -61,16 +61,50 @@ namespace Equation_and_Code.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to class JSObject {
-        ///    function plus(a, b) {
-        ///        return a + b;
-        ///    }
-        ///}
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///
+        ///&lt;head&gt;
+        ///    &lt;meta charset=&quot;utf-8&quot;&gt;
+        ///    &lt;link rel=&quot;stylesheet&quot; href=&quot;./styles/vs.css&quot;&gt;
+        ///    &lt;style&gt;
+        ///        body {
+        ///            font-family: sans-serif;
+        ///        }
+        ///
+        ///        .hljs {
+        ///            display: block;
+        ///            overflow-x: auto;
+        ///            padding: 0.5em;
+        ///            background: white;
+        ///            color: black;
+        ///        }
+        ///
+        ///        .hljs-comment,
+        ///        .hljs-quote,
+        ///        .hljs-variable {
+        ///            color: #008000;
+        ///        }
+        ///
+        ///        .hljs-keyword,
+        ///  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string header {
+            get {
+                return ResourceManager.GetString("header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;/code&gt;
+        ///&lt;/pre&gt;
+        ///&lt;/body&gt;
+        ///&lt;/html&gt;
         ///.
         /// </summary>
-        internal static string test_js_plus {
+        internal static string tail {
             get {
-                return ResourceManager.GetString("test_js_plus", resourceCulture);
+                return ResourceManager.GetString("tail", resourceCulture);
             }
         }
         
