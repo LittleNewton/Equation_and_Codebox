@@ -11,6 +11,7 @@ using System.Resources;
 using System.Reflection;
 using Jering.Web.SyntaxHighlighters.HighlightJS;
 
+
 namespace Equation_and_Code.Ribbon {
     public partial class Main_Ribbon {
         public Form_About.Form_About AboutWindow { get; private set; }
@@ -220,7 +221,6 @@ namespace Equation_and_Code.Ribbon {
 
             // 创建一个 Word Document 变量
             Word.Application app = Globals.ThisAddIn.Application;
-            Word.Document doc = app.ActiveDocument;
             
             // 根据下拉列表选择西文字体，默认字符为 9pt (9 points)
             // TO-DO: 字体的类型已经可以根据下拉菜单选取，后续添加根据下拉菜单选择字体大小的功能
@@ -383,7 +383,15 @@ namespace Equation_and_Code.Ribbon {
 
             // Highlight code
             string result = await StaticHighlightJSService.HighlightAsync(code, "csharp");
-            MessageBox.Show(result);
+            Word.Application app = Globals.ThisAddIn.Application;
+
+            // 构造 HTML 文件，嵌入 style css
+            string html_head = Properties.Resources.header;
+            string html_tail = Properties.Resources.tail;
+
+            app.Selection.TypeText(html_head);
+            app.Selection.TypeText(result);
+            app.Selection.TypeText(html_tail);
         }
     }
 }
