@@ -11,9 +11,9 @@ GitHub 链接：https://github.com/LittleNewton/Equation_and_Codebox
 
 需要有以下支持：
 
-- 安装 Iosevka 字体 (必须，该字体是默认字体)
+- 安装 Iosevka 字体 (必须，该字体是默认字体)，[点此下载](https://github.com/be5invis/Iosevka/releases/download/v16.3.4/super-ttc-iosevka-16.3.4.zip)。
 - 安装 Latin Modern Mono 10 字体
-- 安装 Latin Modern Math 字体 (必须)
+- 安装 Latin Modern Math 字体 (必须)，[点此下载](http://mirrors.ctan.org/fonts/lm-math/opentype/latinmodern-math.otf)。
 - Office 2013 及之后的更新的版本
 
 ## 1. 编译方法（开发者必看）
