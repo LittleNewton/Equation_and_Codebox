@@ -61,54 +61,6 @@ namespace Equation_and_Code.Properties {
         }
         
         /// <summary>
-        ///   查找类似 &lt;!DOCTYPE html&gt;
-        ///&lt;html&gt;
-        ///
-        ///&lt;head&gt;
-        ///    &lt;meta charset=&quot;utf-8&quot;&gt;
-        ///    &lt;link rel=&quot;stylesheet&quot; href=&quot;./styles/vs.css&quot;&gt;
-        ///    &lt;style&gt;
-        ///        body {
-        ///            font-family: sans-serif;
-        ///        }
-        ///
-        ///        .hljs {
-        ///            display: block;
-        ///            overflow-x: auto;
-        ///            padding: 0.5em;
-        ///            background: white;
-        ///            color: black;
-        ///        }
-        ///
-        ///        .hljs-comment,
-        ///        .hljs-quote,
-        ///        .hljs-variable {
-        ///            color: #008000;
-        ///        }
-        ///
-        ///        .hljs-keyword,
-        ///  [字符串的其余部分被截断]&quot;; 的本地化字符串。
-        /// </summary>
-        internal static string header {
-            get {
-                return ResourceManager.GetString("header", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 &lt;/code&gt;
-        ///&lt;/pre&gt;
-        ///&lt;/body&gt;
-        ///&lt;/html&gt;
-        /// 的本地化字符串。
-        /// </summary>
-        internal static string tail {
-            get {
-                return ResourceManager.GetString("tail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 Hello 的本地化字符串。
         /// </summary>
         internal static string test_str {
