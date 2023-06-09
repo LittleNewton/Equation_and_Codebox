@@ -28,6 +28,9 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main_Ribbon));
+            Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl1 = this.Factory.CreateRibbonDropDownItem();
+            Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl2 = this.Factory.CreateRibbonDropDownItem();
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl3 = this.Factory.CreateRibbonDropDownItem();
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl4 = this.Factory.CreateRibbonDropDownItem();
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl5 = this.Factory.CreateRibbonDropDownItem();
@@ -41,23 +44,20 @@
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl13 = this.Factory.CreateRibbonDropDownItem();
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl14 = this.Factory.CreateRibbonDropDownItem();
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl15 = this.Factory.CreateRibbonDropDownItem();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main_Ribbon));
-            Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl1 = this.Factory.CreateRibbonDropDownItem();
-            Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl2 = this.Factory.CreateRibbonDropDownItem();
             this.公式与代码 = this.Factory.CreateRibbonTab();
             this.Group_Equation = this.Factory.CreateRibbonGroup();
+            this.btn_InsertFieldCode = this.Factory.CreateRibbonButton();
+            this.btn_InsertEquation = this.Factory.CreateRibbonButton();
+            this.dropDown_EquationNumerFormat = this.Factory.CreateRibbonDropDown();
             this.Group_Code = this.Factory.CreateRibbonGroup();
+            this.btn_InsertCodeBox = this.Factory.CreateRibbonButton();
             this.dropDown_lineStep = this.Factory.CreateRibbonDropDown();
             this.dropDown1 = this.Factory.CreateRibbonDropDown();
             this.separator1 = this.Factory.CreateRibbonSeparator();
             this.dropDown_CodeFont_ASCII = this.Factory.CreateRibbonDropDown();
             this.dropDown_CodeFont_FarEast = this.Factory.CreateRibbonDropDown();
             this.Group_About = this.Factory.CreateRibbonGroup();
-            this.btn_InsertFieldCode = this.Factory.CreateRibbonButton();
-            this.btn_InsertEquation = this.Factory.CreateRibbonButton();
-            this.btn_InsertCodeBox = this.Factory.CreateRibbonButton();
             this.btn_AboutAddinAndAuthor = this.Factory.CreateRibbonButton();
-            this.dropDown_EquationNumerFormat = this.Factory.CreateRibbonDropDown();
             this.公式与代码.SuspendLayout();
             this.Group_Equation.SuspendLayout();
             this.Group_Code.SuspendLayout();
@@ -81,6 +81,35 @@
             this.Group_Equation.Label = "公式";
             this.Group_Equation.Name = "Group_Equation";
             // 
+            // btn_InsertFieldCode
+            // 
+            this.btn_InsertFieldCode.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.btn_InsertFieldCode.Image = ((System.Drawing.Image)(resources.GetObject("btn_InsertFieldCode.Image")));
+            this.btn_InsertFieldCode.Label = "插入 SEQ 域组合";
+            this.btn_InsertFieldCode.Name = "btn_InsertFieldCode";
+            this.btn_InsertFieldCode.ShowImage = true;
+            this.btn_InsertFieldCode.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_InsertFieldCode_Click);
+            // 
+            // btn_InsertEquation
+            // 
+            this.btn_InsertEquation.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.btn_InsertEquation.Image = ((System.Drawing.Image)(resources.GetObject("btn_InsertEquation.Image")));
+            this.btn_InsertEquation.Label = "插入带编号的公式";
+            this.btn_InsertEquation.Name = "btn_InsertEquation";
+            this.btn_InsertEquation.ShowImage = true;
+            this.btn_InsertEquation.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_InsertEquation_Click);
+            // 
+            // dropDown_EquationNumerFormat
+            // 
+            ribbonDropDownItemImpl1.Label = "(章节号-章节内公式号)";
+            ribbonDropDownItemImpl1.Tag = "x_y";
+            ribbonDropDownItemImpl2.Label = "全文公式号";
+            ribbonDropDownItemImpl2.Tag = "x";
+            this.dropDown_EquationNumerFormat.Items.Add(ribbonDropDownItemImpl1);
+            this.dropDown_EquationNumerFormat.Items.Add(ribbonDropDownItemImpl2);
+            this.dropDown_EquationNumerFormat.Label = "公式编号样式";
+            this.dropDown_EquationNumerFormat.Name = "dropDown_EquationNumerFormat";
+            // 
             // Group_Code
             // 
             this.Group_Code.Items.Add(this.btn_InsertCodeBox);
@@ -91,6 +120,15 @@
             this.Group_Code.Items.Add(this.dropDown_CodeFont_FarEast);
             this.Group_Code.Label = "代码";
             this.Group_Code.Name = "Group_Code";
+            // 
+            // btn_InsertCodeBox
+            // 
+            this.btn_InsertCodeBox.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.btn_InsertCodeBox.Image = ((System.Drawing.Image)(resources.GetObject("btn_InsertCodeBox.Image")));
+            this.btn_InsertCodeBox.Label = "从剪贴板插入代码";
+            this.btn_InsertCodeBox.Name = "btn_InsertCodeBox";
+            this.btn_InsertCodeBox.ShowImage = true;
+            this.btn_InsertCodeBox.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_InsertCodeBox_Click);
             // 
             // dropDown_lineStep
             // 
@@ -157,33 +195,6 @@
             this.Group_About.Label = "关于";
             this.Group_About.Name = "Group_About";
             // 
-            // btn_InsertFieldCode
-            // 
-            this.btn_InsertFieldCode.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.btn_InsertFieldCode.Image = ((System.Drawing.Image)(resources.GetObject("btn_InsertFieldCode.Image")));
-            this.btn_InsertFieldCode.Label = "插入 SEQ 域组合";
-            this.btn_InsertFieldCode.Name = "btn_InsertFieldCode";
-            this.btn_InsertFieldCode.ShowImage = true;
-            this.btn_InsertFieldCode.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_InsertFieldCode_Click);
-            // 
-            // btn_InsertEquation
-            // 
-            this.btn_InsertEquation.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.btn_InsertEquation.Image = ((System.Drawing.Image)(resources.GetObject("btn_InsertEquation.Image")));
-            this.btn_InsertEquation.Label = "插入带编号的公式";
-            this.btn_InsertEquation.Name = "btn_InsertEquation";
-            this.btn_InsertEquation.ShowImage = true;
-            this.btn_InsertEquation.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_InsertEquation_Click);
-            // 
-            // btn_InsertCodeBox
-            // 
-            this.btn_InsertCodeBox.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.btn_InsertCodeBox.Image = ((System.Drawing.Image)(resources.GetObject("btn_InsertCodeBox.Image")));
-            this.btn_InsertCodeBox.Label = "从剪贴板插入代码";
-            this.btn_InsertCodeBox.Name = "btn_InsertCodeBox";
-            this.btn_InsertCodeBox.ShowImage = true;
-            this.btn_InsertCodeBox.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_InsertCodeBox_Click);
-            // 
             // btn_AboutAddinAndAuthor
             // 
             this.btn_AboutAddinAndAuthor.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -192,17 +203,6 @@
             this.btn_AboutAddinAndAuthor.Name = "btn_AboutAddinAndAuthor";
             this.btn_AboutAddinAndAuthor.ShowImage = true;
             this.btn_AboutAddinAndAuthor.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_AboutAddinAndAuthor_Click);
-            // 
-            // dropDown_EquationNumerFormat
-            // 
-            ribbonDropDownItemImpl1.Label = "(章节号-章节内公式号)";
-            ribbonDropDownItemImpl1.Tag = "x_y";
-            ribbonDropDownItemImpl2.Label = "全文公式号";
-            ribbonDropDownItemImpl2.Tag = "x";
-            this.dropDown_EquationNumerFormat.Items.Add(ribbonDropDownItemImpl1);
-            this.dropDown_EquationNumerFormat.Items.Add(ribbonDropDownItemImpl2);
-            this.dropDown_EquationNumerFormat.Label = "公式编号样式";
-            this.dropDown_EquationNumerFormat.Name = "dropDown_EquationNumerFormat";
             // 
             // Main_Ribbon
             // 
