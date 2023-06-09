@@ -5,11 +5,9 @@ using System.Windows.Forms;
 using Microsoft.Office.Tools.Ribbon;
 using Word = Microsoft.Office.Interop.Word;
 using Fonts = System.Drawing;
-using JS = Microsoft.JScript;
-using System.CodeDom.Compiler;
-using System.Resources;
-using System.Reflection;
-using Jering.Web.SyntaxHighlighters.HighlightJS;
+
+
+
 
 
 namespace Equation_and_Code.Ribbon {
