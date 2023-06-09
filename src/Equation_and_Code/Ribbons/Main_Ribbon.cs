@@ -122,16 +122,19 @@ namespace Equation_and_Code.Ribbon {
                 // Type '('
                 app.Selection.TypeText("(");
 
-                // { SEQ Chapter \c } 
-                Word.Field chapterNumber = app.Selection.Range.Fields.Add(
-                    app.Selection.Range,
-                    Word.WdFieldType.wdFieldSequence,
-                    @"chapter \c",
-                    false
-                );
+                if (dropDown_EquationNumerFormat.SelectedItem.Label.ToString() == "(章节号-章节内公式号)")
+                {
+                    // { SEQ Chapter \c } 
+                    Word.Field chapterNumber = app.Selection.Range.Fields.Add(
+                        app.Selection.Range,
+                        Word.WdFieldType.wdFieldSequence,
+                        @"chapter \c",
+                        false
+                    );
 
-                // Type '-'
-                app.Selection.TypeText("-");
+                    // Type '-'
+                    app.Selection.TypeText("-");
+                }
 
                 // { SEQ Equation }
                 Word.Field equationNumber = app.Selection.Range.Fields.Add(
@@ -367,31 +370,6 @@ namespace Equation_and_Code.Ribbon {
         private void btn_AboutAddinAndAuthor_Click(object sender, RibbonControlEventArgs e) {
             Form_About.Form_About AboutWindow = new Form_About.Form_About();
             AboutWindow.Show();
-        }
-        
-
-
-
-
-        /// <summary>
-        /// TEST CODE
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private async void TestBtn_Click(object sender, RibbonControlEventArgs e) {
-            string code = Properties.Resources.test_js_plus;
-
-            // Highlight code
-            string result = await StaticHighlightJSService.HighlightAsync(code, "csharp");
-            Word.Application app = Globals.ThisAddIn.Application;
-
-            // 构造 HTML 文件，嵌入 style css
-            string html_head = Properties.Resources.header;
-            string html_tail = Properties.Resources.tail;
-
-            app.Selection.TypeText(html_head);
-            app.Selection.TypeText(result);
-            app.Selection.TypeText(html_tail);
         }
     }
 }
