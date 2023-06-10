@@ -11,7 +11,7 @@ GitHub 链接：https://github.com/LittleNewton/Equation_and_Codebox
 
 需要有以下支持：
 
-- 安装 Iosevka 字体 (必须，该字体是默认字体)，[点此下载](https://github.com/be5invis/Iosevka/releases/download/v16.3.4/super-ttc-iosevka-16.3.4.zip)。
+- 安装 Iosevka 字体 (必须，该字体是默认字体)，[点此下载](https://github.com/be5invis/Iosevka/releases/download/v24.1.1/super-ttc-iosevka-24.1.1.zip)。
 - 安装 Latin Modern Mono 10 字体
 - 安装 Latin Modern Math 字体 (必须)，[点此下载](http://mirrors.ctan.org/fonts/lm-math/opentype/latinmodern-math.otf)。
 - Office 2013 及之后的更新的版本
@@ -30,10 +30,11 @@ GitHub 链接：https://github.com/LittleNewton/Equation_and_Codebox
 
 首先双击 `utils` 文件夹内的两个 reg 文件，选择安装。
 
-```
+``` txt
 32.reg
 64.reg
 ```
+
 这么做是为了规避 Windows 的安全审查机制。因为软件作者目前没有微软开发者证书，所以编译的软件不能直接安装。导入上述两个 reg 注册表项之后，将可自由安装。
 
 ### 2.2 安装 vsto 文件
