@@ -247,8 +247,19 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
     <Folder Include="Ribbons\icons\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_github_512px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_zhihu_512px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_bilibili_480px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_google_code_480px.png" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

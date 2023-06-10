@@ -18,8 +18,46 @@ namespace Equation_and_Code.Form_About {
 
         }
 
-        private void button1_Click(object sender, EventArgs e) {
-            this.Close();
+
+
+
+
+        /// <summary>
+        /// 哔哩哔哩
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void logo_bilibili_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://space.bilibili.com/45879248/");
+        }
+
+
+
+
+
+        /// <summary>
+        /// GitHub
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void logo_github_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/LittleNewton/Equation_and_Codebox/");
+        }
+
+
+
+
+
+        /// <summary>
+        /// 知乎
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void logo_zhihu_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://zhihu.com/people/littleNewton");
         }
     }
 }
