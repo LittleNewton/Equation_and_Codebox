@@ -118,18 +118,20 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>This software was designed for inserting math equations and codes with highlighting into Microsoft Word.
+    <value>This software was designed for inserting math equations and highlighted codes into Microsoft Word.
 
-In summer 2020, Peng Liu got the idea for creating one like this. He leveraged .Net VBA to develop the first version of this software. Then, he rewrote this software with C# and Office SDK.
+In summer 2020, Peng Liu got the idea for creating one like this. He leveraged dotnet VBA to develop the first version of this software. Then, he rewrote this software with C# and Office SDK in 2021.
 
 Hopefully, this software can help Microsoft users to do a more comfortable job.
 
 Best wishes.
 
+P.S. If you are willing to give contribution to this project, don't be hesitate to commit your pull-request on GitHub.
+
 ---
 
 Peng Liu
-Jul. 1, 2023.</value>
+Jun. 11, 2023.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
